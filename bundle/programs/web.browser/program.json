@@ -1,0 +1,809 @@
+{
+  "format": "web-program-pre1",
+  "manifest": [
+    {
+      "path": "d7ff7424df7df350d313d3cb2c2c6aab2b15713f.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/d7ff7424df7df350d313d3cb2c2c6aab2b15713f.js?meteor_js_resource=true",
+      "size": 1392171,
+      "hash": "d7ff7424df7df350d313d3cb2c2c6aab2b15713f"
+    },
+    {
+      "path": "65a93a0264acbdfb26b3a02ecb8c89046763d610.css",
+      "where": "client",
+      "type": "css",
+      "cacheable": true,
+      "url": "/65a93a0264acbdfb26b3a02ecb8c89046763d610.css?meteor_css_resource=true",
+      "size": 177669,
+      "hash": "65a93a0264acbdfb26b3a02ecb8c89046763d610"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.eot",
+      "size": 102112,
+      "hash": "af15ea9a0f36de7c49938c1a0b33e3823b7faf8d"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.svg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.svg",
+      "size": 330095,
+      "hash": "9c774089ac0fe6af20a397800bd68a29ae82305e"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.ttf",
+      "size": 101892,
+      "hash": "07ad0ca993da54350e7f90510d72bc0ea6ef4fc8"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.woff",
+      "size": 101968,
+      "hash": "a1f7e97bb659ae3dbceb1fa117c32456591a4a1d"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/material-design-icons/Material-Design-Icons.woff2",
+      "size": 33220,
+      "hash": "0063270d49b4c4aed8a509e5be358d6cf2fce0f2"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.eot",
+      "size": 137002,
+      "hash": "bf2e81a00767d5bf6a8233468bbffe3e2d34b54f"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.ttf",
+      "size": 122640,
+      "hash": "03f69bb5620489039d50246415db259a27bd986d"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.woff",
+      "size": 56792,
+      "hash": "ed257c0699ee2dd6f18f6611b5ea887101f83432"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/material-design-icons/iconfont/MaterialIcons-Regular.woff2",
+      "size": 42284,
+      "hash": "06435e57278122e39e926983fde428dac4ea0b52"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Bold.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Bold.ttf",
+      "size": 127744,
+      "hash": "5a287d717fa8438596ad29027a6b70e2f397f0d7"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Bold.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Bold.woff",
+      "size": 62876,
+      "hash": "7c08d3bccfccff607b3a553163cd0b8ca5db3bcb"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Bold.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Bold.woff2",
+      "size": 49976,
+      "hash": "14143ee07b9ff49120217a06a6a6008ba6244046"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Light.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Light.ttf",
+      "size": 126792,
+      "hash": "cadccd5bde0871b52a43fbf92503412c4a4e9535"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Light.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Light.woff",
+      "size": 62316,
+      "hash": "65cf37eb45ba487be303bcbb78f876486578f596"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Light.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Light.woff2",
+      "size": 49380,
+      "hash": "ee30392fd5dc21d9e7ff942945734409008c92a3"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Medium.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Medium.ttf",
+      "size": 127488,
+      "hash": "d8c857e043d92de5568f873389dd9e6a16f0c0f8"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Medium.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Medium.woff",
+      "size": 62980,
+      "hash": "6ddc0ef559a5320a33342caa3a46059f5418d1a3"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Medium.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Medium.woff2",
+      "size": 50224,
+      "hash": "78c92a0936998d2ed20be84d83e3eb2017f439e6"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Regular.ttf",
+      "size": 126072,
+      "hash": "4ec395e894b0700eac6f8a45f3e9964122aca270"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Regular.woff",
+      "size": 61736,
+      "hash": "3f5071d216184b6db9f90f12904e5993f1a32a37"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Regular.woff2",
+      "size": 49236,
+      "hash": "a3ada7f42129255017b0aea8aa6f5ecd737d53a1"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Thin.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Thin.ttf",
+      "size": 127584,
+      "hash": "633f36a2b256121745545ee736b3898c40884f3c"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Thin.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Thin.woff",
+      "size": 61628,
+      "hash": "abb091867efeef151c5d745fd7c9608527fe4541"
+    },
+    {
+      "path": "packages/poetic_materialize-scss/dist/font/roboto/Roboto-Thin.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/poetic_materialize-scss/dist/font/roboto/Roboto-Thin.woff2",
+      "size": 48524,
+      "hash": "9c0aa8729c7f4937feb8071a3320e0e1276d6189"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.eot",
+      "size": 165742,
+      "hash": "5e3a1a9b72af1d842682f7e0a5c305922c583e3f"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.svg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.svg",
+      "size": 444379,
+      "hash": "2958ef6f1890fda3f47468dedc70c2e1b2dd9511"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.ttf",
+      "size": 165548,
+      "hash": "dbaed61bd8235d7e12522b21ce66fb90a4f9740d"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.woff",
+      "size": 98024,
+      "hash": "951644ff8c02065fd58f609d142e45daaaa5370f"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/fortawesome_fontawesome/upstream/fonts/fontawesome-webfont.woff2",
+      "size": 77160,
+      "hash": "a34ffd10b2a49d55d6247e351520ffdf556e0bb1"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome/upstream/fonts/FontAwesome.otf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/fortawesome_fontawesome/upstream/fonts/FontAwesome.otf",
+      "size": 134808,
+      "hash": "cd12480a6626f5faf89ddd7ebb00edf64059498d"
+    },
+    {
+      "path": "app/images/background_workbench.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/background_workbench.jpg",
+      "size": 295044,
+      "hash": "e3775fe9d9b4c4e3c274d6c4c7f4e79f86067450"
+    },
+    {
+      "path": "app/images/background_workbench_fade.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/background_workbench_fade.jpg",
+      "size": 289167,
+      "hash": "ad9ab250c1392605ea3b548852a32ddfd855b1da"
+    },
+    {
+      "path": "app/images/beta.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/beta.png",
+      "size": 23233,
+      "hash": "2982391a2b714b61483fa2a07d2b6ccf878bdf4f"
+    },
+    {
+      "path": "app/images/card-build.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/card-build.jpg",
+      "size": 24747,
+      "hash": "331bf72b0ac0699ea7f5ef3ea3fc7f0199195308"
+    },
+    {
+      "path": "app/images/card-search.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/card-search.jpg",
+      "size": 19139,
+      "hash": "844630bd8c4ddc09f0c2a246829846fccb2d3a4d"
+    },
+    {
+      "path": "app/images/footer.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/footer.jpg",
+      "size": 45626,
+      "hash": "dece9a67f172318d1c87b40eb9d687580dc938b2"
+    },
+    {
+      "path": "app/images/menu_logo.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/menu_logo.png",
+      "size": 11860,
+      "hash": "041b0055669422da04ddd60d50850e187ff9ecce"
+    },
+    {
+      "path": "app/images/updated_ rh-logo.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/updated_ rh-logo.png",
+      "size": 25434,
+      "hash": "65f0a22ad9d203113bee7aed1357bf5ea070b8e4"
+    },
+    {
+      "path": "app/images/updated_menu-sandwich.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/updated_menu-sandwich.png",
+      "size": 2836,
+      "hash": "cd8c38d8ba38f9f1b4f939bedd986781372e5be2"
+    },
+    {
+      "path": "app/images/SBIcons/icon-relevance-engaged.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/icon-relevance-engaged.png",
+      "size": 20370,
+      "hash": "e657c91380378173b0475ac1814f5b3a83b95e1d"
+    },
+    {
+      "path": "app/images/SBIcons/icon-relevance-fit.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/icon-relevance-fit.png",
+      "size": 9752,
+      "hash": "a9ee0392091c521a59a889c43488d9f8df054a89"
+    },
+    {
+      "path": "app/images/SBIcons/icon-relevance-interest.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/icon-relevance-interest.png",
+      "size": 15283,
+      "hash": "5a9600938ebad9c0f38f9e5e4962ebd2fd5f27eb"
+    },
+    {
+      "path": "app/images/SBIcons/icon-relevance-strategic.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/icon-relevance-strategic.png",
+      "size": 18763,
+      "hash": "c74ee414fa10d03add5080505cbedd1b8265f3b7"
+    },
+    {
+      "path": "app/images/SBIcons/icon-relevance-visited.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/icon-relevance-visited.png",
+      "size": 9274,
+      "hash": "0e0374cbd407c6defbea18a94c654054ad82b434"
+    },
+    {
+      "path": "app/images/SBIcons/Company Size/Enterprise.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Company Size/Enterprise.png",
+      "size": 9631,
+      "hash": "1ab44b3c1bd82baa13e56e494459bf5d7d65f44e"
+    },
+    {
+      "path": "app/images/SBIcons/Company Size/Medium Business.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Company Size/Medium Business.png",
+      "size": 9208,
+      "hash": "59ec24041782dea36a284fb1f998850b331b8932"
+    },
+    {
+      "path": "app/images/SBIcons/Company Size/Mid-Market Enterprise.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Company Size/Mid-Market Enterprise.png",
+      "size": 11101,
+      "hash": "b978b9e1a6ef5012a7c93156a2e6a476f864a370"
+    },
+    {
+      "path": "app/images/SBIcons/Company Size/Small Business.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Company Size/Small Business.png",
+      "size": 11979,
+      "hash": "e781b3dd973527bbc676fa9f02cc65199f2f9c98"
+    },
+    {
+      "path": "app/images/SBIcons/Engagement Status/Inactive.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Engagement Status/Inactive.png",
+      "size": 13967,
+      "hash": "ef29f35138444a95f91b6357a1f1a33e73fe219b"
+    },
+    {
+      "path": "app/images/SBIcons/Engagement Status/Invalid.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Engagement Status/Invalid.png",
+      "size": 16725,
+      "hash": "825a3c88de72cb718046a48ed165bdbecf27950e"
+    },
+    {
+      "path": "app/images/SBIcons/Engagement Status/Lapsed.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Engagement Status/Lapsed.png",
+      "size": 14864,
+      "hash": "f32bf2149fd077c5e10b12b49dd8faf80bb472a0"
+    },
+    {
+      "path": "app/images/SBIcons/Engagement Status/Lapsing.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Engagement Status/Lapsing.png",
+      "size": 17777,
+      "hash": "334d4f2a9acc4d0dc451aa84a972c22cc22d4e1c"
+    },
+    {
+      "path": "app/images/SBIcons/Engagement Status/Most Active.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Engagement Status/Most Active.png",
+      "size": 17351,
+      "hash": "e3968a469f9dd5ec960acbb9bf15bf3a8a36e75a"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Education.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Education.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Finance.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Finance.png",
+      "size": 13277,
+      "hash": "43b193ee770829b91cf96201af56ff781f99baca"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Government.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Government.png",
+      "size": 10574,
+      "hash": "3361022c80917c16538a4e88e282eb0478780ab6"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Healthcare.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Healthcare.png",
+      "size": 28792,
+      "hash": "06845b75bdde2db40bb2d6b1da1d124a11a97b8f"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Manufacturing.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Manufacturing.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Media & Internet.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Media & Internet.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Industry/Telecommunications.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Industry/Telecommunications.png",
+      "size": 14516,
+      "hash": "e2cfae0fd9034dbdf36d729af5b3973998f1c5af"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/CloudForms.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/CloudForms.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/Enterprise Application Platform.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/Enterprise Application Platform.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/OpenStack.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/OpenStack.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/RHEL.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/RHEL.png",
+      "size": 13855,
+      "hash": "044c9c19166b8aadd212ce422731674e19abf4e3"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/RHEV.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/RHEV.png",
+      "size": 12906,
+      "hash": "6755fe7eb15ea3159c338e0f91d13fa588b006de"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/Satellite.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/Satellite.png",
+      "size": 20298,
+      "hash": "0db7dba5a299b41e05d22d6136ed8ba1139e6295"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/icon-installed-technologies-JBoss-middleware.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/icon-installed-technologies-JBoss-middleware.png",
+      "size": 15680,
+      "hash": "6905e6ade2b454303808c963af4c7bb7d62a32df"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/icon-installed-technologies-cloud-computing.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/icon-installed-technologies-cloud-computing.png",
+      "size": 17518,
+      "hash": "f6ec32cfe497fadc316ab386ce0e72737b48cab0"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/icon-installed-technologies-mobile.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/icon-installed-technologies-mobile.png",
+      "size": 14584,
+      "hash": "44ff21e791f3a0cac2d4977ba2796e999b5a7f4b"
+    },
+    {
+      "path": "app/images/SBIcons/Installed Technologies/icon-installed-technologies-storage.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Installed Technologies/icon-installed-technologies-storage.png",
+      "size": 15729,
+      "hash": "7c29f13f9257b99007f26339925aab5a28a514e6"
+    },
+    {
+      "path": "app/images/SBIcons/Persona/Architect.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Persona/Architect.png",
+      "size": 47060,
+      "hash": "e2763c56559b0ba62027e2a5a85bd65493850ea0"
+    },
+    {
+      "path": "app/images/SBIcons/Persona/Business Analyst.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Persona/Business Analyst.png",
+      "size": 46815,
+      "hash": "de7c1f830ca201caabddba2c185e7ae8c28ed0ea"
+    },
+    {
+      "path": "app/images/SBIcons/Persona/IT Executive.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Persona/IT Executive.png",
+      "size": 48414,
+      "hash": "8a48b98d2a315a50b4d823e7a829012761e52c75"
+    },
+    {
+      "path": "app/images/SBIcons/Persona/IT Manager.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Persona/IT Manager.png",
+      "size": 49779,
+      "hash": "ba79370b98fd6ca294213e6ad4d75194b6311b44"
+    },
+    {
+      "path": "app/images/SBIcons/Persona/Lead Developer.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Persona/Lead Developer.png",
+      "size": 48126,
+      "hash": "fbab222b7c53d607aab60556a5719dd7755515cd"
+    },
+    {
+      "path": "app/images/SBIcons/Persona/System Administrator.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Persona/System Administrator.png",
+      "size": 48070,
+      "hash": "2e7db82fa88a41de9ce1db20cdc761a3a1717895"
+    },
+    {
+      "path": "app/images/SBIcons/Programs/Accelerate.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Programs/Accelerate.png",
+      "size": 18715,
+      "hash": "c82158ad01fe9c5c2d7e35376a26055adf0b1747"
+    },
+    {
+      "path": "app/images/SBIcons/Programs/Agility.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Programs/Agility.png",
+      "size": 19371,
+      "hash": "cef0b831490bca5b1ebf09c746b782aa185b684e"
+    },
+    {
+      "path": "app/images/SBIcons/Programs/Efficiency.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Programs/Efficiency.png",
+      "size": 18726,
+      "hash": "ac5dbe4cf8ffd8744d637e064f40dac94f40d6b1"
+    },
+    {
+      "path": "app/images/SBIcons/Programs/Integrate.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Programs/Integrate.png",
+      "size": 19046,
+      "hash": "360448dc735003e098444f870b861d0cae64507a"
+    },
+    {
+      "path": "app/images/SBIcons/Programs/Training.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Programs/Training.png",
+      "size": 19890,
+      "hash": "e2ec06ef2a0078c18dd6ddb50b2a37c11d8c7145"
+    },
+    {
+      "path": "app/images/SBIcons/Programs/Transitional.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Programs/Transitional.png",
+      "size": 19138,
+      "hash": "ee9c8a426184b1cd6bbf12c31e10b71f477a48c4"
+    },
+    {
+      "path": "app/images/SBIcons/Super Regions/APAC.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Super Regions/APAC.png",
+      "size": 18715,
+      "hash": "c82158ad01fe9c5c2d7e35376a26055adf0b1747"
+    },
+    {
+      "path": "app/images/SBIcons/Super Regions/EMEA.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Super Regions/EMEA.png",
+      "size": 19371,
+      "hash": "cef0b831490bca5b1ebf09c746b782aa185b684e"
+    },
+    {
+      "path": "app/images/SBIcons/Super Regions/LATAM.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Super Regions/LATAM.png",
+      "size": 19046,
+      "hash": "360448dc735003e098444f870b861d0cae64507a"
+    },
+    {
+      "path": "app/images/SBIcons/Super Regions/NA.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/SBIcons/Super Regions/NA.png",
+      "size": 18726,
+      "hash": "ac5dbe4cf8ffd8744d637e064f40dac94f40d6b1"
+    },
+    {
+      "path": "head.html",
+      "where": "internal",
+      "type": "head",
+      "hash": "fff341d5fa31f1cccc2b4ef81a4b7fe9d8f0fbd7"
+    },
+    {
+      "path": "body.html",
+      "where": "internal",
+      "type": "body",
+      "hash": "494902d916af3e7381f3b9958462f04b6875677c"
+    }
+  ]
+}
