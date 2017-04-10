@@ -1,3 +1,3 @@
-echo '***** Hello *****'
-(cd ./bundle/programs/server && npm install)
-node server.js
+#!/bin/bash
+(cd programs/server && npm install)
+node main.js
