@@ -1,7 +1,6 @@
 var _ = require("underscore");
 var os = require("os");
 var path = require("path");
-var assert = require("assert");
 
 // All of these functions are attached to files.js for the tool;
 // they live here because we need them in boot.js as well to avoid duplicating
@@ -69,18 +68,11 @@ var convertToStandardLineEndings = function (fileContents) {
                      .replace(new RegExp("\r", "g"), "\n");
 };
 
-// Return the Unicode Normalization Form of the passed in path string, using
-// "Normalization Form Canonical Composition"
-const unicodeNormalizePath = (path) => {
-  return (path) ? path.normalize('NFC') : path;
-};
 
 // wrappings for path functions that always run as they were on unix (using
 // forward slashes)
 var wrapPathFunction = function (name, partialPaths) {
   var f = path[name];
-  assert.strictEqual(typeof f, "function");
-
   return function (/* args */) {
     if (process.platform === 'win32') {
       var args = _.toArray(arguments);
@@ -89,16 +81,10 @@ var wrapPathFunction = function (name, partialPaths) {
         // forget about conversion of absolute paths for Windows
         return toDosPath(p, partialPaths);
       });
-
-      var result = f.apply(path, args);
-      if (typeof result === "string") {
-        result = toPosixPath(result, partialPaths);
-      }
-
-      return result;
+      return toPosixPath(f.apply(path, args), partialPaths);
+    } else {
+      return f.apply(path, arguments);
     }
-
-    return f.apply(path, arguments);
   };
 };
 
@@ -109,11 +95,12 @@ files.pathResolve = wrapPathFunction("resolve");
 files.pathDirname = wrapPathFunction("dirname");
 files.pathBasename = wrapPathFunction("basename");
 files.pathExtname = wrapPathFunction("extname");
-// The path.isAbsolute function is implemented in Node v4.
-files.pathIsAbsolute = wrapPathFunction("isAbsolute");
 files.pathSep = '/';
 files.pathDelimiter = ':';
 files.pathOsDelimiter = path.delimiter;
+files.pathIsAbsolute = function (path) {
+  return toPosixPath(path).charAt(0) === '/';
+};
 
 files.convertToStandardPath = convertToStandardPath;
 files.convertToOSPath = convertToOSPath;
@@ -122,4 +109,3 @@ files.convertToPosixPath = toPosixPath;
 
 files.convertToStandardLineEndings = convertToStandardLineEndings;
 files.convertToOSLineEndings = convertToOSLineEndings;
-files.unicodeNormalizePath = unicodeNormalizePath;

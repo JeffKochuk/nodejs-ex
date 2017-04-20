@@ -8,7 +8,6 @@ var sourcemap_support = require('source-map-support');
 var bootUtils = require('./boot-utils.js');
 var files = require('./mini-files.js');
 var npmRequire = require('./npm-require.js').require;
-var Profile = require('./profile.js').Profile;
 
 // This code is duplicated in tools/main.js.
 var MIN_NODE_VERSION = 'v0.10.41';
@@ -97,6 +96,11 @@ sourcemap_support.install({
   wrapCallSite: wrapCallSite
 });
 
+// Only enabled by default in development.
+if (process.env.METEOR_SHELL_DIR) {
+  require('./shell-server.js').listen(process.env.METEOR_SHELL_DIR);
+}
+
 // As a replacement to the old keepalives mechanism, check for a running
 // parent every few seconds. Exit if the parent is not running.
 //
@@ -124,7 +128,8 @@ var startCheckForLiveParent = function (parentPid) {
   }
 };
 
-var loadServerBundles = Profile("Load server bundles", function () {
+
+Fiber(function () {
   _.each(serverJson.load, function (fileInfo) {
     var code = fs.readFileSync(path.resolve(serverDir, fileInfo.path));
     var nonLocalNodeModulesPaths = [];
@@ -145,14 +150,6 @@ var loadServerBundles = Profile("Load server bundles", function () {
       });
     }
 
-    function statOrNull(path) {
-      try {
-        return fs.statSync(path);
-      } catch (e) {
-        return null;
-      }
-    }
-
     var Npm = {
       /**
        * @summary Require a package that was specified using
@@ -161,9 +158,7 @@ var loadServerBundles = Profile("Load server bundles", function () {
        * @locus Server
        * @memberOf Npm
        */
-      require: Profile(function getBucketName(name) {
-        return "Npm.require(" + JSON.stringify(name) + ")";
-      }, function (name) {
+      require: function (name) {
         if (nonLocalNodeModulesPaths.length === 0) {
           return require(name);
         }
@@ -176,7 +171,7 @@ var loadServerBundles = Profile("Load server bundles", function () {
             name.split("/", 1)[0]
           ));
 
-          if (statOrNull(packageBase)) {
+          if (fs.existsSync(packageBase)) {
             return fullPath = files.convertToOSPath(
               files.pathResolve(nodeModuleBase, name)
             );
@@ -202,7 +197,7 @@ var loadServerBundles = Profile("Load server bundles", function () {
               "'. Did you forget to call 'Npm.depends' in package.js " +
               "within the '" + packageName + "' package?");
           }
-      })
+      }
     };
     var getAsset = function (assetPath, encoding, callback) {
       var fut;
@@ -227,10 +222,6 @@ var loadServerBundles = Profile("Load server bundles", function () {
       // written on Windows.
       assetPath = files.convertToStandardPath(assetPath);
 
-      // Unicode normalize the asset path to prevent string mismatches when
-      // using this string elsewhere.
-      assetPath = files.unicodeNormalizePath(assetPath);
-
       if (!fileInfo.assets || !_.has(fileInfo.assets, assetPath)) {
         _callback(new Error("Unknown asset: " + assetPath));
       } else {
@@ -248,17 +239,7 @@ var loadServerBundles = Profile("Load server bundles", function () {
       getBinary: function (assetPath, callback) {
         return getAsset(assetPath, undefined, callback);
       },
-      /**
-       * @summary Get the absolute path to the static server asset. Note that assets are read-only.
-       * @locus Server [Not in build plugins]
-       * @memberOf Assets
-       * @param {String} assetPath The path of the asset, relative to the application's `private` subdirectory.
-       */
       absoluteFilePath: function (assetPath) {
-        // Unicode normalize the asset path to prevent string mismatches when
-        // using this string elsewhere.
-        assetPath = files.unicodeNormalizePath(assetPath);
-
         if (!fileInfo.assets || !_.has(fileInfo.assets, assetPath)) {
           throw new Error("Unknown asset: " + assetPath);
         }
@@ -274,7 +255,7 @@ var loadServerBundles = Profile("Load server bundles", function () {
 
     var wrapParts = ["(function(Npm,Assets"];
     if (isModulesRuntime) {
-      wrapParts.push(",npmRequire,Profile");
+      wrapParts.push(",npmRequire");
     }
     // \n is necessary in case final line is a //-comment
     wrapParts.push("){", code, "\n})");
@@ -297,25 +278,20 @@ var loadServerBundles = Profile("Load server bundles", function () {
     var func = require('vm').runInThisContext(wrapped, scriptPath, true);
     var args = [Npm, Assets];
     if (isModulesRuntime) {
-      args.push(npmRequire, Profile);
+      args.push(npmRequire);
     }
-
-    Profile(fileInfo.path, func).apply(global, args);
+    func.apply(global, args);
   });
-});
 
-var callStartupHooks = Profile("Call Meteor.startup hooks", function () {
   // run the user startup hooks.  other calls to startup() during this can still
   // add hooks to the end.
   while (__meteor_bootstrap__.startupHooks.length) {
     var hook = __meteor_bootstrap__.startupHooks.shift();
-    Profile.time(hook.stack || "(unknown)", hook);
+    hook();
   }
   // Setting this to null tells Meteor.startup to call hooks immediately.
   __meteor_bootstrap__.startupHooks = null;
-});
 
-var runMain = Profile("Run main()", function () {
   // find and run main()
   // XXX hack. we should know the package that contains main.
   var mains = [];
@@ -345,12 +321,4 @@ var runMain = Profile("Run main()", function () {
   if (process.env.METEOR_PARENT_PID) {
     startCheckForLiveParent(process.env.METEOR_PARENT_PID);
   }
-});
-
-Fiber(function () {
-  Profile.run("Server startup", function () {
-    loadServerBundles();
-    callStartupHooks();
-    runMain();
-  });
 }).run();

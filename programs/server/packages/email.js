@@ -36,23 +36,23 @@ var MailComposer = EmailInternals.NpmModules.mailcomposer.module.MailComposer;
 
 var makePool = function (mailUrlString) {
   var mailUrl = urlModule.parse(mailUrlString);
-  if (mailUrl.protocol !== 'smtp:' && mailUrl.protocol !== 'smtps:')
+  if (mailUrl.protocol !== 'smtp:')
     throw new Error("Email protocol in $MAIL_URL (" +
-                    mailUrlString + ") must be 'smtp' or 'smtps'");
+                    mailUrlString + ") must be 'smtp'");
 
   var port = +(mailUrl.port);
   var auth = false;
   if (mailUrl.auth) {
     var parts = mailUrl.auth.split(':', 2);
-    auth = {user: parts[0],
-            pass: parts[1]};
+    auth = {user: parts[0] && decodeURIComponent(parts[0]),
+            pass: parts[1] && decodeURIComponent(parts[1])};
   }
 
   var simplesmtp = Npm.require('simplesmtp');
   var pool = simplesmtp.createClientPool(
     port,  // Defaults to 25
     mailUrl.hostname,  // Defaults to "localhost"
-    { secureConnection: (port === 465) || (mailUrl.protocol === 'smtps:'),
+    { secureConnection: (port === 465),
       // XXX allow maxConnections to be configured?
       auth: auth });
 
@@ -197,10 +197,6 @@ Email.send = function (options) {
       mc.addHeader(name, value);
     });
 
-    if (!options.headers || !options.headers.hasOwnProperty('Date')) {
-      mc.addHeader('Date', new Date().toUTCString().replace(/GMT/, '+0000'));
-    }
-
     _.each(options.attachments, function(attachment){
       mc.addAttachment(attachment);
     });
@@ -231,3 +227,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=email.js.map

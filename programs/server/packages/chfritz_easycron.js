@@ -143,3 +143,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=chfritz_easycron.js.map

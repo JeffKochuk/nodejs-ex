@@ -4,8 +4,8 @@
 var Meteor = Package.meteor.Meteor;
 var global = Package.meteor.global;
 var meteorEnv = Package.meteor.meteorEnv;
-var _ = Package.underscore._;
 var HTML = Package.htmljs.HTML;
+var _ = Package.underscore._;
 
 /* Package-scope variables */
 var BlazeTools, toJSLiteral, toObjectLiteralKey, ToJSVisitor;
@@ -420,3 +420,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=blaze-tools.js.map

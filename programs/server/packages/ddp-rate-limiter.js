@@ -11,12 +11,12 @@ var DDPRateLimiter;
 
 (function(){
 
-/////////////////////////////////////////////////////////////////////////////////////
-//                                                                                 //
-// packages/ddp-rate-limiter/ddp-rate-limiter.js                                   //
-//                                                                                 //
-/////////////////////////////////////////////////////////////////////////////////////
-                                                                                   //
+//////////////////////////////////////////////////////////////////////////////////
+//                                                                              //
+// packages/ddp-rate-limiter/ddp-rate-limiter.js                                //
+//                                                                              //
+//////////////////////////////////////////////////////////////////////////////////
+                                                                                //
 // Rate Limiter built into DDP with a default error message. See README or
 // online documentation for more details.
 DDPRateLimiter = {};
@@ -83,11 +83,10 @@ DDPRateLimiter.setErrorMessage = function (message) {
  * Default = 10.
  * @param {number} timeInterval time interval in milliseconds after which
  * rule's counters are reset. Default = 1000.
- * @param {function} callback function to be called after a rule is executed.
  * @locus Server
  */
-DDPRateLimiter.addRule = function (matcher, numRequests, timeInterval, callback) {
-  return rateLimiter.addRule(matcher, numRequests, timeInterval, callback);
+DDPRateLimiter.addRule = function (matcher, numRequests, timeInterval) {
+  return rateLimiter.addRule(matcher, numRequests, timeInterval);
 };
 
 DDPRateLimiter.printRules = function () {
@@ -115,7 +114,7 @@ DDPRateLimiter._check = function (input) {
   return rateLimiter.check(input);
 };
 
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -130,3 +129,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=ddp-rate-limiter.js.map

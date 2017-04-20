@@ -6,17 +6,9 @@ var files = require('./mini-files.js');
 var serverJson = require("./server-json.js");
 var topLevelIdPattern = /^[^./]/;
 
-function statOrNull(path) {
-  try {
-    return fs.statSync(path);
-  } catch (e) {
-    return null;
-  }
-}
-
 function findAppDirHelper(absOSPath) {
   if (fs.statSync(absOSPath).isDirectory() &&
-      statOrNull(path.join(absOSPath, ".meteor"))) {
+      fs.existsSync(path.join(absOSPath, ".meteor"))) {
     return absOSPath;
   }
 
@@ -76,15 +68,9 @@ function registerNodeModules(name, node_modules) {
       parts.forEach(function (part, i) {
         if (part === "npm") {
           addByParts(parts.slice(i + 1), node_modules);
-
         } else if (part === ".npm") {
-          if (name) {
-            parts.unshift("node_modules", "meteor", name);
-          }
-
           if (parts[i + 1] === "package") {
             addByParts(parts.slice(i + 2), node_modules);
-
           } else if (parts[i + 1] === "plugin") {
             assert.strictEqual(parts[i + 2], name);
             addByParts(parts.slice(i + 3), node_modules);
@@ -106,10 +92,12 @@ function registerNodeModules(name, node_modules) {
     assert.notEqual(parts[0], "");
     assert.notEqual(parts[0], "..");
 
-    // Ensure a leading / character.
-    if (parts[0].length > 0) {
-      parts.unshift("");
+    if (name) {
+      parts.unshift("node_modules", "meteor", name);
     }
+
+    // Ensure a leading / character.
+    parts.unshift("");
 
     nodeModulesRegistry[parts.join("/")] = absPath;
   }
@@ -143,17 +131,7 @@ function resolve(id) {
   }
 
   if (res === null) {
-    var idParts = id.split("/");
-    var meteorAddTip = "";
-    // If it looks like `meteor/xxx`, the user may forgot to add the 
-    // package before importing it.
-    if (idParts.length === 2 &&
-        idParts[0] === "meteor") {
-          meteorAddTip = ". Try `meteor add " + idParts[1] + "` " +
-          "as it looks like you tried to import it without adding " +
-          "to the project.";
-    }
-    res = new Error("Cannot find module '" + id + "'" + meteorAddTip);
+    res = new Error("Cannot find module '" + id + "'");
     res.code = "MODULE_NOT_FOUND";
     throw res;
   }

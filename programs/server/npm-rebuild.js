@@ -5,10 +5,8 @@ if (process.env.METEOR_SKIP_NPM_REBUILD) {
   process.exit(0);
 }
 
-var fs = require("fs");
 var path = require("path");
 var spawn = require("child_process").spawn;
-var rebuildArgs = require("./npm-rebuild-args.js").get();
 
 try {
   // This JSON file gets written in meteor/tools/isobuild/bundler.js.
@@ -24,26 +22,17 @@ try {
 }
 
 // Make sure the npm finds this exact version of node in its $PATH.
-var binDir = path.dirname(process.execPath);
-var PATH = binDir + path.delimiter + process.env.PATH;
+var PATH = path.dirname(process.execPath) + ":" + process.env.PATH;
 var env = Object.create(process.env, {
   PATH: { value: PATH }
 });
-
-var npmCmd = "npm";
-if (process.platform === "win32") {
-  var npmCmdPath = path.join(binDir, "npm.cmd");
-  if (fs.existsSync(npmCmdPath)) {
-    npmCmd = npmCmdPath;
-  }
-}
 
 function rebuild(i) {
   var dir = rebuilds && rebuilds[i];
 
   if (! dir) {
     // Print Node/V8/etc. versions for diagnostic purposes.
-    spawn(npmCmd, ["version", "--json"], {
+    spawn("npm", ["version", "--json"], {
       stdio: "inherit",
       env: env
     });
@@ -51,7 +40,7 @@ function rebuild(i) {
     return;
   }
 
-  spawn(npmCmd, rebuildArgs, {
+  spawn("npm", ["rebuild"], {
     cwd: path.join(__dirname, dir),
     stdio: "inherit",
     env: env

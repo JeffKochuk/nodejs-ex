@@ -9,10 +9,9 @@ var Deps = Package.tracker.Deps;
 var check = Package.check.check;
 var Match = Package.check.Match;
 var _ = Package.underscore._;
+var HTML = Package.htmljs.HTML;
 var ObserveSequence = Package['observe-sequence'].ObserveSequence;
 var ReactiveVar = Package['reactive-var'].ReactiveVar;
-var OrderedDict = Package['ordered-dict'].OrderedDict;
-var HTML = Package.htmljs.HTML;
 
 /* Package-scope variables */
 var Blaze, UI, Handlebars;
@@ -32,15 +31,12 @@ var Blaze, UI, Handlebars;
 Blaze = {};
 
 // Utility to HTML-escape a string.  Included for legacy reasons.
-// TODO: Should be replaced with _.escape once underscore is upgraded to a newer
-//       version which escapes ` (backtick) as well. Underscore 1.5.2 does not.
 Blaze._escape = (function() {
   var escape_map = {
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#x27;",
-    "/": "&#x2F;",
     "`": "&#x60;", /* IE allows backtick-delimited attributes?? */
     "&": "&amp;"
   };
@@ -60,30 +56,6 @@ Blaze._warn = function (msg) {
     console.warn(msg);
   }
 };
-
-var nativeBind = Function.prototype.bind;
-
-// An implementation of _.bind which allows better optimization.
-// See: https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#3-managing-arguments
-if (nativeBind) {
-  Blaze._bind = function (func, obj) {
-    if (arguments.length === 2) {
-      return nativeBind.call(func, obj);
-    }
-
-    // Copy the arguments so this function can be optimized.
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-
-    return nativeBind.apply(func, args.slice(1));
-  };
-}
-else {
-  // A slower but backwards compatible version.
-  Blaze._bind = _.bind;
-}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -364,6 +336,9 @@ Blaze.View.prototype.autorun = function (f, _inViewScope, displayName) {
   if (this._isInRender) {
     throw new Error("Can't call View#autorun from inside render(); try calling it from the created or rendered callback");
   }
+  if (Tracker.active) {
+    throw new Error("Can't call View#autorun from a Tracker Computation; try calling it from the created or rendered callback");
+  }
 
   var templateInstanceFunc = Blaze.Template._currentTemplateInstanceFunc;
 
@@ -526,12 +501,14 @@ Blaze._materializeView = function (view, parentView, _workStack, _intoArray) {
       var htmljs = view._render();
       view._isInRender = false;
 
-      if (! c.firstRun && ! Blaze._isContentEqual(lastHtmljs, htmljs)) {
+      if (! c.firstRun) {
         Tracker.nonreactive(function doMaterialize() {
           // re-render
           var rangesAndNodes = Blaze._materializeDOM(htmljs, [], view);
-          domrange.setMembers(rangesAndNodes);
-          Blaze._fireCallbacks(view, 'rendered');
+          if (! Blaze._isContentEqual(lastHtmljs, htmljs)) {
+            domrange.setMembers(rangesAndNodes);
+            Blaze._fireCallbacks(view, 'rendered');
+          }
         });
       }
       lastHtmljs = htmljs;
@@ -569,7 +546,7 @@ Blaze._materializeView = function (view, parentView, _workStack, _intoArray) {
         _intoArray.push(domrange);
       });
       // now push the task that calculates initialContents
-      _workStack.push(Blaze._bind(Blaze._materializeDOM, null,
+      _workStack.push(_.bind(Blaze._materializeDOM, null,
                              lastHtmljs, initialContents, view, _workStack));
     }
   });
@@ -1472,12 +1449,12 @@ Blaze.registerHelper = function (name, func) {
 // Also documented as Template.deregisterHelper
 Blaze.deregisterHelper = function(name) {
   delete Blaze._globalHelpers[name];
-};
+}
 
 var bindIfIsFunction = function (x, target) {
   if (typeof x !== 'function')
     return x;
-  return Blaze._bind(x, target);
+  return _.bind(x, target);
 };
 
 // If `x` is a function, binds the value of `this` for that function
@@ -1607,7 +1584,7 @@ Blaze.View.prototype.lookup = function (name, _options) {
   var foundTemplate;
 
   if (this.templateInstance) {
-    boundTmplInstance = Blaze._bind(this.templateInstance, this);
+    boundTmplInstance = _.bind(this.templateInstance, this);
   }
 
   // 0. looking up the parent data context with the special "../" syntax
@@ -2208,7 +2185,7 @@ Template.prototype.events = function (eventMap) {
         if (data == null)
           data = {};
         var args = Array.prototype.slice.call(arguments);
-        var tmplInstanceFunc = Blaze._bind(view.templateInstance, view);
+        var tmplInstanceFunc = _.bind(view.templateInstance, view);
         args.splice(1, 0, tmplInstanceFunc());
 
         return Template._withTemplateInstanceFunc(tmplInstanceFunc, function () {
@@ -2336,3 +2313,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=blaze.js.map

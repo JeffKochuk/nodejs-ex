@@ -483,7 +483,7 @@ _.extend(Meteor, {
    * @memberOf Meteor
    * @summary Cancel a repeating function call scheduled by `Meteor.setInterval`.
    * @locus Anywhere
-   * @param {Object} id The handle returned by `Meteor.setInterval`
+   * @param {Number} id The handle returned by `Meteor.setInterval`
    */
   clearInterval: function(x) {
     return clearInterval(x);
@@ -493,7 +493,7 @@ _.extend(Meteor, {
    * @memberOf Meteor
    * @summary Cancel a function call scheduled by `Meteor.setTimeout`.
    * @locus Anywhere
-   * @param {Object} id The handle returned by `Meteor.setTimeout`
+   * @param {Number} id The handle returned by `Meteor.setTimeout`
    */
   clearTimeout: function(x) {
     return clearTimeout(x);
@@ -858,22 +858,7 @@ Meteor._sleepForMs = function (ms) {
 //                                                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                    //
-Meteor.startup = function startup(callback) {
-  if (process.env.METEOR_PROFILE) {
-    // Create a temporary error to capture the current stack trace.
-    var error = new Error("Meteor.startup");
-
-    // Capture the stack trace of the Meteor.startup call, excluding the
-    // startup stack frame itself.
-    Error.captureStackTrace(error, startup);
-
-    callback.stack = error.stack
-      .split(/\n\s*/) // Split lines and remove leading whitespace.
-      .slice(0, 2) // Only include the call site.
-      .join(" ") // Collapse to one line.
-      .replace(/^Error: /, ""); // Not really an Error per se.
-  }
-
+Meteor.startup = function (callback) {
   if (__meteor_bootstrap__.startupHooks) {
     __meteor_bootstrap__.startupHooks.push(callback);
   } else {
@@ -1378,3 +1363,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=meteor.js.map

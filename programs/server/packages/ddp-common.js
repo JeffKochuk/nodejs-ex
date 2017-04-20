@@ -258,7 +258,6 @@ DDPCommon.stringifyDDP = function (msg) {
  * inside a method definition.
  * @param {Object} options
  * @instanceName this
- * @showInstanceName true
  */
 DDPCommon.MethodInvocation = function (options) {
   var self = this;
@@ -305,7 +304,7 @@ DDPCommon.MethodInvocation = function (options) {
   // On the server, the connection this method call came in on.
 
   /**
-   * @summary Access inside a method invocation. The [connection](#meteor_onconnection) that this method was received on. `null` if the method is not associated with a connection, eg. a server initiated method call. Calls to methods made from a server method which was in turn initiated from the client share the same `connection`.
+   * @summary Access inside a method invocation. The [connection](#meteor_onconnection) that this method was received on. `null` if the method is not associated with a connection, eg. a server initiated method call.
    * @locus Server
    * @name  connection
    * @memberOf DDPCommon.MethodInvocation
@@ -348,6 +347,7 @@ _.extend(DDPCommon.MethodInvocation.prototype, {
     self._setUserId(userId);
   }
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -481,3 +481,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=ddp-common.js.map

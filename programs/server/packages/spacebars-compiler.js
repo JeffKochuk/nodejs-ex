@@ -4,10 +4,10 @@
 var Meteor = Package.meteor.Meteor;
 var global = Package.meteor.global;
 var meteorEnv = Package.meteor.meteorEnv;
-var _ = Package.underscore._;
 var HTML = Package.htmljs.HTML;
 var HTMLTools = Package['html-tools'].HTMLTools;
 var BlazeTools = Package['blaze-tools'].BlazeTools;
+var _ = Package.underscore._;
 
 /* Package-scope variables */
 var SpacebarsCompiler, TemplateTag, ReactComponentSiblingForbidder;
@@ -41,13 +41,13 @@ SpacebarsCompiler = {};
 //
 // - `path` - An array of one or more strings.  The path of `{{foo.bar}}`
 //   is `["foo", "bar"]`.  Applies to DOUBLE, TRIPLE, INCLUSION, BLOCKOPEN,
-//   BLOCKCLOSE, and ELSE.
+//   and BLOCKCLOSE.
 //
 // - `args` - An array of zero or more argument specs.  An argument spec
 //   is a two or three element array, consisting of a type, value, and
 //   optional keyword name.  For example, the `args` of `{{foo "bar" x=3}}`
 //   are `[["STRING", "bar"], ["NUMBER", 3, "x"]]`.  Applies to DOUBLE,
-//   TRIPLE, INCLUSION, BLOCKOPEN, and ELSE.
+//   TRIPLE, INCLUSION, and BLOCKOPEN.
 //
 // - `value` - A string of the comment's text. Applies to COMMENT and
 //   BLOCKCOMMENT.
@@ -81,7 +81,7 @@ var makeStacheTagStartRegex = function (r) {
 // result, but not the interesting part of the tag.
 var starts = {
   ESCAPE: /^\{\{(?=\{*\|)/,
-  ELSE: makeStacheTagStartRegex(/^\{\{\s*else(\s+(?!\s)|(?=[}]))/i),
+  ELSE: makeStacheTagStartRegex(/^\{\{\s*else(?=[\s}])/i),
   DOUBLE: makeStacheTagStartRegex(/^\{\{\s*(?!\s)/),
   TRIPLE: makeStacheTagStartRegex(/^\{\{\{\s*(?!\s)/),
   BLOCKCOMMENT: makeStacheTagStartRegex(/^\{\{\s*!--/),
@@ -260,7 +260,7 @@ TemplateTag.parse = function (scannerOrString) {
 
   var scanExpr = function (type) {
     var endType = type;
-    if (type === 'INCLUSION' || type === 'BLOCKOPEN' || type === 'ELSE')
+    if (type === 'INCLUSION' || type === 'BLOCKOPEN')
       endType = 'DOUBLE';
 
     var tag = new TemplateTag;
@@ -334,9 +334,8 @@ TemplateTag.parse = function (scannerOrString) {
     if (! run(ends.DOUBLE))
       expected('`}}`');
   } else if (type === 'ELSE') {
-    if (! run(ends.DOUBLE)) {
-      tag = scanExpr(type);
-    }
+    if (! run(ends.DOUBLE))
+      expected('`}}`');
   } else if (type === 'ESCAPE') {
     var result = run(/^\{*\|/);
     tag.value = '{{' + result.slice(0, -1);
@@ -431,27 +430,9 @@ TemplateTag.parseCompleteTag = function (scannerOrString, position) {
     var lastPos = scanner.pos; // save for error messages
     var tmplTag = TemplateTag.parse(scanner); // {{else}} or {{/foo}}
 
-    var lastElseContentTag = result;
-    while (tmplTag.type === 'ELSE') {
-      if (lastElseContentTag === null) {
-        scanner.fatal("Unexpected else after {{else}}");
-      }
-
-      if (tmplTag.path) {
-        lastElseContentTag.elseContent = new TemplateTag;
-        lastElseContentTag.elseContent.type = 'BLOCKOPEN';
-        lastElseContentTag.elseContent.path = tmplTag.path;
-        lastElseContentTag.elseContent.args = tmplTag.args;
-        lastElseContentTag.elseContent.content = HTMLTools.parseFragment(scanner, parserOptions);
-
-        lastElseContentTag = lastElseContentTag.elseContent;
-      }
-      else {
-        // parse {{else}} and content up to close tag
-        lastElseContentTag.elseContent = HTMLTools.parseFragment(scanner, parserOptions);
-
-        lastElseContentTag = null;
-      }
+    if (tmplTag.type === 'ELSE') {
+      // parse {{else}} and content up to close tag
+      result.elseContent = HTMLTools.parseFragment(scanner, parserOptions);
 
       if (scanner.rest().slice(0, 2) !== '{{')
         scanner.fatal("Expected block close for " + blockName);
@@ -1239,10 +1220,6 @@ _.extend(CodeGen.prototype, {
 //                                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                        //
-var UglifyJSMinify = null;
-if (Meteor.isServer) {
-  UglifyJSMinify = Npm.require('uglify-js').minify;
-}
 
 SpacebarsCompiler.parse = function (input) {
 
@@ -1340,26 +1317,24 @@ SpacebarsCompiler.codeGen = function (parseTree, options) {
 };
 
 SpacebarsCompiler._beautify = function (code) {
-  if (!UglifyJSMinify) {
+  if (Package['minifier-js'] && Package['minifier-js'].UglifyJSMinify) {
+    var result = Package['minifier-js'].UglifyJSMinify(
+      code,
+      { fromString: true,
+        mangle: false,
+        compress: false,
+        output: { beautify: true,
+                  indent_level: 2,
+                  width: 80 } });
+    var output = result.code;
+    // Uglify interprets our expression as a statement and may add a semicolon.
+    // Strip trailing semicolon.
+    output = output.replace(/;$/, '');
+    return output;
+  } else {
+    // don't actually beautify; no UglifyJS
     return code;
   }
-
-  var result = UglifyJSMinify(code, { 
-    fromString: true,
-    mangle: false,
-    compress: false,
-    output: { 
-      beautify: true,
-      indent_level: 2,
-      width: 80
-    }
-  });
-  
-  var output = result.code;
-  // Uglify interprets our expression as a statement and may add a semicolon.
-  // Strip trailing semicolon.
-  output = output.replace(/;$/, '');
-  return output;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1377,3 +1352,5 @@ if (typeof Package === 'undefined') Package = {};
 });
 
 })();
+
+//# sourceMappingURL=spacebars-compiler.js.map
