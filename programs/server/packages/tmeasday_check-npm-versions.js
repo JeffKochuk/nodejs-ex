@@ -19,98 +19,111 @@ var exports;
 
 var require = meteorInstall({"node_modules":{"meteor":{"tmeasday:check-npm-versions":{"check-npm-versions.js":["semver","meteor/underscore",function(require,exports,module){
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                   //
-// packages/tmeasday_check-npm-versions/check-npm-versions.js                                        //
-//                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                     //
-exports.__esModule = true;                                                                           //
-exports.checkNpmVersions = undefined;                                                                //
-                                                                                                     //
-var _semver = require('semver');                                                                     // 1
-                                                                                                     //
-var _semver2 = _interopRequireDefault(_semver);                                                      //
-                                                                                                     //
-var _underscore = require('meteor/underscore');                                                      // 2
-                                                                                                     //
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }    //
-                                                                                                     //
-// Returns:                                                                                          //
-//   - true      if a version of the package in the range is installed                               //
-//   - false     if no version is installed                                                          //
-//   - version#  if incompatible version is installed                                                //
-var compatibleVersionIsInstalled = function compatibleVersionIsInstalled(name, range) {              // 8
-  try {                                                                                              // 9
-    var installedVersion = require(name + '/package.json').version;                                  // 10
-    if (_semver2['default'].satisfies(installedVersion, range)) {                                    // 11
-      return true;                                                                                   // 12
-    } else {                                                                                         //
-      return installedVersion;                                                                       // 14
-    }                                                                                                //
-  } catch (e) {                                                                                      //
-    // XXX add something to the tool to make this more reliable                                      //
-    var message = e.toString();                                                                      // 18
-    // One message comes out of the install npm package the other from npm directly                  //
-    if (message.match("Cannot find module") || message.match("Can't find npm module")) {             // 16
-      return false;                                                                                  // 21
-    } else {                                                                                         //
-      throw e;                                                                                       // 23
-    }                                                                                                //
-  }                                                                                                  //
-};                                                                                                   //
-                                                                                                     //
-var checkNpmVersions = exports.checkNpmVersions = function checkNpmVersions(packages, packageName) {
-  var failures = {};                                                                                 // 29
-  _underscore._.forEach(packages, function (range, name) {                                           // 30
-    var failure = compatibleVersionIsInstalled(name, range);                                         // 31
-    if (failure !== true) {                                                                          // 32
-      failures[name] = failure;                                                                      // 33
-    }                                                                                                //
-  });                                                                                                //
-                                                                                                     //
-  if (_underscore._.keys(failures).length === 0) {                                                   // 37
-    return true;                                                                                     // 38
-  }                                                                                                  //
-                                                                                                     //
-  var errors = [];                                                                                   // 41
-  _underscore._.forEach(failures, function (installed, name) {                                       // 42
-    var requirement = name + '@' + packages[name];                                                   // 43
-                                                                                                     //
-    if (installed) {                                                                                 // 45
-      errors.push(' - ' + name + '@' + installed + ' installed, ' + requirement + ' needed');        // 46
-    } else {                                                                                         //
-      errors.push(' - ' + name + '@' + packages[name] + ' not installed.');                          // 48
-    }                                                                                                //
-  });                                                                                                //
-                                                                                                     //
-  var qualifier = packageName ? '(for ' + packageName + ') ' : '';                                   // 52
-  console.warn('WARNING: npm peer requirements ' + qualifier + 'not installed:\n' + errors.join('\n') + '\n\nRead more about installing npm peer dependencies:\n  http://guide.meteor.com/using-packages.html#peer-npm-dependencies\n');
-};                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                              //
+// packages/tmeasday_check-npm-versions/check-npm-versions.js                                                   //
+//                                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                //
+module.export({                                                                                                 // 1
+  checkNpmVersions: function () {                                                                               // 1
+    return checkNpmVersions;                                                                                    // 1
+  }                                                                                                             // 1
+});                                                                                                             // 1
+var semver = void 0;                                                                                            // 1
+module.importSync("semver", {                                                                                   // 1
+  "default": function (v) {                                                                                     // 1
+    semver = v;                                                                                                 // 1
+  }                                                                                                             // 1
+}, 0);                                                                                                          // 1
+                                                                                                                //
+var _ = void 0;                                                                                                 // 1
+                                                                                                                //
+module.importSync("meteor/underscore", {                                                                        // 1
+  _: function (v) {                                                                                             // 1
+    _ = v;                                                                                                      // 1
+  }                                                                                                             // 1
+}, 1);                                                                                                          // 1
+                                                                                                                //
+// Returns:                                                                                                     // 4
+//   - true      if a version of the package in the range is installed                                          // 5
+//   - false     if no version is installed                                                                     // 6
+//   - version#  if incompatible version is installed                                                           // 7
+var compatibleVersionIsInstalled = function (name, range) {                                                     // 8
+  try {                                                                                                         // 9
+    var installedVersion = require(name + "/package.json").version;                                             // 10
+                                                                                                                //
+    if (semver.satisfies(installedVersion, range)) {                                                            // 11
+      return true;                                                                                              // 12
+    } else {                                                                                                    // 13
+      return installedVersion;                                                                                  // 14
+    }                                                                                                           // 15
+  } catch (e) {                                                                                                 // 16
+    // XXX add something to the tool to make this more reliable                                                 // 17
+    var message = e.toString(); // One message comes out of the install npm package the other from npm directly
+                                                                                                                //
+    if (message.match("Cannot find module") || message.match("Can't find npm module")) {                        // 20
+      return false;                                                                                             // 21
+    } else {                                                                                                    // 22
+      throw e;                                                                                                  // 23
+    }                                                                                                           // 24
+  }                                                                                                             // 25
+};                                                                                                              // 26
+                                                                                                                //
+var checkNpmVersions = function (packages, packageName) {                                                       // 28
+  var failures = {};                                                                                            // 29
+                                                                                                                //
+  _.forEach(packages, function (range, name) {                                                                  // 30
+    var failure = compatibleVersionIsInstalled(name, range);                                                    // 31
+                                                                                                                //
+    if (failure !== true) {                                                                                     // 32
+      failures[name] = failure;                                                                                 // 33
+    }                                                                                                           // 34
+  });                                                                                                           // 35
+                                                                                                                //
+  if (_.keys(failures).length === 0) {                                                                          // 37
+    return true;                                                                                                // 38
+  }                                                                                                             // 39
+                                                                                                                //
+  var errors = [];                                                                                              // 41
+                                                                                                                //
+  _.forEach(failures, function (installed, name) {                                                              // 42
+    var requirement = name + "@" + packages[name];                                                              // 43
+                                                                                                                //
+    if (installed) {                                                                                            // 45
+      errors.push(" - " + name + "@" + installed + " installed, " + requirement + " needed");                   // 46
+    } else {                                                                                                    // 47
+      errors.push(" - " + name + "@" + packages[name] + " not installed.");                                     // 48
+    }                                                                                                           // 49
+  });                                                                                                           // 50
+                                                                                                                //
+  var qualifier = packageName ? "(for " + packageName + ") " : '';                                              // 52
+  console.warn("WARNING: npm peer requirements " + qualifier + "not installed:\n" + errors.join('\n') + "\n\nRead more about installing npm peer dependencies:\n  http://guide.meteor.com/using-packages.html#peer-npm-dependencies\n");
+};                                                                                                              // 59
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }],"node_modules":{"semver":{"package.json":function(require,exports){
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                   //
-// ../npm/node_modules/semver/package.json                                                           //
-//                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                     //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                              //
+// ../../.0.3.1.1k8i7v4++os+web.browser+web.cordova/npm/node_modules/semver/package.json                        //
+//                                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                //
 exports.name = "semver";
 exports.version = "5.1.0";
 exports.main = "semver.js";
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 },"semver.js":function(require,exports,module){
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                   //
-// node_modules/meteor/tmeasday:check-npm-versions/node_modules/semver/semver.js                     //
-//                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                     //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                              //
+// node_modules/meteor/tmeasday_check-npm-versions/node_modules/semver/semver.js                                //
+//                                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                //
 exports = module.exports = SemVer;
 
 // The debug function is excluded entirely from the minified version.
@@ -1300,7 +1313,7 @@ function outside(version, range, hilo, loose) {
   return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }}}}}}},{"extensions":[".js",".json"]});
 var exports = require("./node_modules/meteor/tmeasday:check-npm-versions/check-npm-versions.js");
